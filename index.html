@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Seni çok seviyorum</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap">
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<style>
+:root{--bg1:#fff3f0;--bg2:#fde3ef;--text:#8a3552;--muted:#b0728a;--glow:255,140,170;--leaf1:#2f7d4a;--leaf2:#7cc47a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg1:#1d1233;--bg2:#3a1538;--text:#ffd6e4;--muted:#c79ab0;--glow:255,120,170;--leaf1:#1f5f3a;--leaf2:#56a96a}}
+:root[data-theme="dark"]{--bg1:#1d1233;--bg2:#3a1538;--text:#ffd6e4;--muted:#c79ab0;--glow:255,120,170;--leaf1:#1f5f3a;--leaf2:#56a96a}
+html,body{height:100%}
+body{margin:0;background:linear-gradient(160deg,var(--bg1),var(--bg2));color:var(--text);font-family:Georgia,'Times New Roman',serif;overflow-x:hidden}
+.scene{position:relative;width:380px;height:580px;flex:none}
+@media (max-width:420px){.scene{transform:scale(.82);transform-origin:top center;margin-bottom:-100px}}
+svg.plant{position:absolute;left:0;top:0;overflow:visible}
+.stem{stroke-dasharray:1;stroke-dashoffset:1}
+.leaf{transform:scale(0)}
+.go .stem{animation:draw 1.5s ease-out forwards}
+.go .leaf{animation:pop 1s cubic-bezier(.2,.9,.3,1.2) forwards}
+.go .leaf.a{animation-delay:.9s}.go .leaf.b{animation-delay:1.2s}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes pop{to{transform:scale(1)}}
+.glow{position:absolute;left:-40px;top:-40px;width:460px;height:460px;border-radius:50%;background:radial-gradient(circle,rgba(var(--glow),.45),transparent 65%);opacity:0}
+.go .glow{animation:fade 2s ease 2.4s forwards,pulse 4s ease-in-out 4.4s infinite alternate}
+@keyframes fade{to{opacity:1}}
+@keyframes pulse{from{transform:scale(.94)}to{transform:scale(1.06)}}
+.head{position:absolute;left:0;top:0;width:380px;height:380px}
+.go .head{animation:sway 7s ease-in-out 5s infinite alternate}
+@keyframes sway{from{transform:rotate(-2deg)}to{transform:rotate(2deg)}}
+.petal{position:absolute;left:50%;bottom:50%;width:var(--w);height:var(--l);margin-left:calc(var(--w) / -2);transform-origin:50% 100%;border-radius:50% 50% 46% 46% / 92% 92% 8% 8%;background:linear-gradient(to top,var(--c1),var(--c2));box-shadow:inset 0 0 3px rgba(255,255,255,.25),0 0 2px rgba(0,0,0,.2);transform:rotate(calc(var(--a) * .15)) scale(.1);opacity:0}
+.petal::after{content:"";position:absolute;left:50%;top:10%;bottom:6%;width:1.5px;margin-left:-.75px;background:rgba(255,255,255,.4);border-radius:2px}
+.go .petal{animation:bloom 1.7s cubic-bezier(.2,.9,.25,1.1) var(--d) forwards}
+@keyframes bloom{0%{transform:rotate(calc(var(--a) * .15)) scale(.1);opacity:0}20%{opacity:1}100%{transform:rotate(var(--a)) scale(1);opacity:1}}
+.core{position:absolute;left:50%;top:50%;width:24px;height:24px;margin:-12px 0 0 -12px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#fff6b0,#f0b429 70%);box-shadow:0 0 10px rgba(255,200,80,.8);opacity:0}
+.go .core{animation:fade .8s ease 3s forwards}
+.msg{font-family:'Dancing Script',cursive,Georgia,serif;font-size:clamp(1.9rem,8.5vw,2.8rem);line-height:1.2;letter-spacing:.5px;text-shadow:0 2px 14px rgba(var(--glow),.55);opacity:0;transform:translateY(10px)}
+.heart{display:inline-block;color:#ff4d79;animation:beat 1.4s ease-in-out infinite}
+@keyframes beat{0%,100%{transform:scale(1)}15%{transform:scale(1.25)}30%{transform:scale(1)}45%{transform:scale(1.18)}}
+.go .msg{animation:msg 2s ease 5s forwards}
+@keyframes msg{to{opacity:1;transform:none}}
+.fall{position:fixed;top:-5vh;pointer-events:none;border-radius:50% 50% 45% 45% / 90% 90% 10% 10%;opacity:0;animation:fall linear infinite}
+@keyframes fall{0%{transform:translate3d(0,-5vh,0) rotate(0);opacity:0}10%{opacity:.75}100%{transform:translate3d(var(--dx),110vh,0) rotate(540deg);opacity:.3}}
+</style>
+</head>
+<body class="flex flex-col items-center justify-center min-h-full py-6">
+  <div id="scene" class="scene">
+    <svg class="plant" width="380" height="580" viewBox="0 0 380 580" aria-hidden="true">
+      <defs>
+        <linearGradient id="sg" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="var(--leaf1)"/><stop offset="1" stop-color="var(--leaf2)"/></linearGradient>
+        <linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="var(--leaf2)"/><stop offset="1" stop-color="var(--leaf1)"/></linearGradient>
+      </defs>
+      <path class="stem" pathLength="1" d="M190 575 C 150 480, 235 385, 190 195" fill="none" stroke="url(#sg)" stroke-width="6" stroke-linecap="round"/>
+      <g transform="translate(176,452) rotate(-8)"><g class="leaf a"><path d="M0 0 C -30 -42 -85 -48 -118 -20 C -85 12 -30 26 0 0Z" fill="url(#lg)"/><path d="M0 0 C -40 -8 -80 -14 -108 -19" stroke="rgba(255,255,255,.4)" stroke-width="1.5" fill="none"/></g></g>
+      <g transform="translate(203,372) rotate(6)"><g class="leaf b"><path d="M0 0 C 30 -38 80 -44 108 -16 C 80 12 30 24 0 0Z" fill="url(#lg)"/><path d="M0 0 C 40 -8 75 -13 100 -16" stroke="rgba(255,255,255,.4)" stroke-width="1.5" fill="none"/></g></g>
+    </svg>
+    <div class="glow"></div>
+    <div id="head" class="head"><div class="core"></div></div>
+  </div>
+  <p class="msg -mt-6 px-4 text-center">Seni çok seviyorum <span class="heart">♥️</span></p>
+  <button id="replay" class="mt-5 px-5 py-1.5 rounded-full text-sm border transition hover:opacity-100 opacity-70" style="color:var(--muted);border-color:var(--muted)">Yeniden aç</button>
+<script>
+(function(){
+  var head=document.getElementById('head'),scene=document.getElementById('scene'),core=head.querySelector('.core');
+  var rings=14;
+  for(var r=0;r<rings;r++){
+    var t=r/(rings-1),n=12+r*5,len=28+r*10.5,w=7+r*.9,hue=48-t*76,sat=88-t*10,li=74-t*12;
+    for(var i=0;i<n;i++){
+      var p=document.createElement('div');
+      p.className='petal';
+      var a=(360/n)*i+(r%2?180/n:0)+(Math.random()*6-3);
+      var l=len*(0.94+Math.random()*0.12),lj=(Math.random()*6-3);
+      p.style.setProperty('--a',a+'deg');
+      p.style.setProperty('--l',l.toFixed(1)+'px');
+      p.style.setProperty('--w',w.toFixed(1)+'px');
+      p.style.setProperty('--c1','hsl('+hue+','+sat+'%,'+(li-14+lj)+'%)');
+      p.style.setProperty('--c2','hsl('+(hue+9)+','+(sat+6)+'%,'+(li+8+lj)+'%)');
+      p.style.setProperty('--d',(1.6+(rings-1-r)*.12+i*.008).toFixed(2)+'s');
+      head.insertBefore(p,r===0?core:head.firstChild);
+    }
+  }
+  var cols=['#ff9fbd','#ffc2d4','#ffb36b','#ffd9a0','#f78fb3'];
+  for(var k=0;k<16;k++){
+    var f=document.createElement('div'),s=7+Math.random()*7;
+    f.className='fall';
+    f.style.cssText='left:'+(Math.random()*100)+'vw;width:'+(s*.6)+'px;height:'+s+'px;background:'+cols[k%cols.length]+';--dx:'+((Math.random()*160-80))+'px;animation-duration:'+(10+Math.random()*8)+'s;animation-delay:'+(5+Math.random()*12)+'s';
+    document.body.appendChild(f);
+  }
+  function play(){scene.classList.remove('go');document.body.classList.remove('go');void scene.offsetWidth;scene.classList.add('go');document.body.classList.add('go')}
+  document.getElementById('replay').addEventListener('click',play);
+  play();
+})();
+</script>
+</body>
+</html>
